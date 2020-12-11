@@ -1,0 +1,160 @@
+
+/* simple reset: */
+* {
+    margin: 0;
+    padding: 0;
+    /* margins and padding are not added to the total hieightof the element */
+    box-sizing: border-box
+}
+
+
+body {
+    /*use the power of inheritance here, instead of individually changing each*/
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;/* 1.7 * predefined line height */
+    color: rgb(145, 145, 145);
+    padding: 2vh  ;/* place that nice border around the webpage*/
+    position: relative;
+    background-color: rgb(36, 35, 35);
+}
+
+.header {
+    height: 95vh; /*95 percent of viewport*/
+    background-image: linear-gradient(to right bottom, #71d56f49, #28b475ad) ,url("../img/hotel-1.jpg"); /*first value gets rendered first*/
+    background-size: cover; /*fit the element inside its enclosing box*/
+    background-position: center; /*if must resize, shave off other than top (preserve top position)*/
+    /*make a polygon that will enclose the portion we want to KEEP clips out all outside this shape (specifying the 4 corners */
+    clip-path: polygon(0 0, 100% 0, 100% 80vh,0 100% ); /* 4 points are clockwise from origin*/
+}
+
+.logo-box {
+    position: absolute;
+    /* 40px relative to the closest parent with relative position in this case the header (we added for this specifically)*/
+    top:40px;
+    left:40px;
+}
+
+.logo{
+    height:30px;
+}
+
+.logo-box:hover{
+    animation: moveInRight 1s ease;
+}
+.text-box{
+    position: absolute;
+    top:40vh;
+    left:50vw;
+    /* I did this on my own so the text fits*/
+    width: fit-content;
+    background-color: rgba(160, 48, 48, 0.911);
+    text-align: center;
+    
+
+    
+    
+    /*positions itself according to its to left corner, by translating itself half up and half left, its as if we're position relative to the box's center*/
+    transform: translate(-50%,-50%);
+}
+.heading-primary {
+    color:#fff;
+    text-transform: uppercase;
+    margin-bottom: 60px;
+}
+
+.heading-primary-main{
+    /*need heading lines to be on top of eachother, block vs inline, block creates new lines after the element make each block*/
+    display: block;
+    font-size: 60px;
+    
+    letter-spacing: 17.5px;
+    font-weight: 400;
+    animation: moveInLeft 2s ease-in-out;
+    
+}
+.heading-primary-sub{
+    display: block;
+    font-weight: 100;
+    
+    letter-spacing: 15px;
+    font-size: 20px;
+    animation: moveInRight 2s ease-in-out;
+}
+
+@keyframes moveInLeft {
+    /*best to only animate on 2 properties: opacity and transform (browsers optimized for this*/
+    0%{
+        opacity: 0;
+        transform:  translateX(-100px);
+    }
+    60%{
+        transform: translateX(-1px);
+    }
+    100%{
+        opacity:1;
+        transform: translateX(0);
+    }
+}
+@keyframes moveInRight {
+    /*best to only animate on 2 properties: opacity and transform (browsers optimized for this*/
+    0%{
+        opacity: 0;
+        transform:  translateX(100px);
+    }
+    60%{
+        transform: translateX(1px);
+    }
+    100%{
+        opacity:1;
+        transform: translateX(0);
+    }
+}
+
+.btn:link, 
+.btn:visited {
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 5px 10px;
+    display: inline-block;
+    /*treated as text so text-align property applies here*/
+    border-radius: 200px;
+    transition: all 200ms ;
+    position: relative;
+    margin-bottom: 10px;
+}
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.271);
+}
+.btn:active{
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+.btn-white{
+    background-color: #fff;
+    color: #777
+}
+
+.btn::after{
+    content: "";
+    display: inline-block;
+    height:100%;
+    width: 100%;
+    border-radius: 200px;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.btn-white::after{
+    background-color: #fff;
+    position: absolute;
+    top:0;
+    left:0;
+}
+.btn:hover::after{
+    transform: scale(1.3);
+    background-color: rgba(44, 15, 15, 0.938)(51, 18, 18);
+    opacity: 0;
+}
